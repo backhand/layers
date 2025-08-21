@@ -1,0 +1,6 @@
+name: Modules workflow guide
+description: Guidelines for modules that run before or after messages to guide behavior, including activation, contracts, and safety.
+order: 12
+enabled: false
+content: >-
+  

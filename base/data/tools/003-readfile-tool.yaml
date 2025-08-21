@@ -1,0 +1,13 @@
+name: readfile
+description: "Reads the content of a file"
+enabled: true
+type: function
+parameters:
+  type: object
+  required:
+    - file
+  properties:
+    file:
+      type: string
+      description: The path to the file to read
+  additionalProperties: false
