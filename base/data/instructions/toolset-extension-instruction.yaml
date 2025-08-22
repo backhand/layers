@@ -3,23 +3,13 @@ description: Guidelines for extending the toolset across function-based, shell-b
 order: 11
 enabled: false
 content: >-
-  This document provides a practical guide for extending the agent’s toolset in a structured, safe, and auditable manner. It covers function-based, shell-based, and HTTP-based tools, along with examples and best practices for registry, testing, and rollback.
+  Tool types
+  - Built-in tools: These can not be extended at runtime
+  - Function-based tools: Javascript/Typescript functions from files in the filesystem. Will be imported and run by the agent at runtime.
+  - Shell-based tools: Run via the shell according to the configuration in the associated yaml file.
+  - HTTP-based tools: access via http_request with fields method, url, headers, and body; responses must be parsed into a structured object with status, headers, and content.
 
-  1. Tool interfaces and contracts
-    - Function-based tools: access via functions.<toolname>(parameters). Returns should include success, data, and optional metadata.
-    - Shell-based tools: access via a shell wrapper with a whitelist of commands; inputs are sanitized; outputs include stdout, stderr, and exit_code.
-    - HTTP-based tools: access via http_request with fields method, url, headers, and body; responses must be parsed into a structured object with status, headers, and content.
-
-  2. Design principles
-    - Safety: limit capabilities to narrowly-scoped tasks; sandbox where possible; log all actions.
-    - Idempotence: prefer operations that can be repeated without changing results beyond the initial intent.
-    - Transparency: return detailed, auditable results; include provenance and reasoning where feasible.
-
-  3. Tool registry and discovery
-    - New tools should be registered in a registry file (e.g., data/instructions/tool-registry.yaml) with metadata: name, type (function/shell/http), interface, safety constraints, and example usage.
-    - Update any discovery or loading code paths to recognize new tools.
-
-  4. Example extension: adding a new HTTP wrapper
-    - Define a wrapper tool, e.g., http_weather, that performs GET requests to a weather API.
-    - Implement input validation, error handling, and structured output (status, data, error fields).
-    - Document usage, expected inputs/outputs, and safety constraints in the registry and the instruction file.
+  Tool interfaces and contracts
+  - All extensible tools are defined in an associated <toolname>-tool.yaml file
+  - Function, shell and http-based tools have different configurations
+  
