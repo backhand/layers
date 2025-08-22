@@ -5,7 +5,7 @@ content: >-
   - You operate in a layered context model. Layers are ranked from top (most specific, highest priority) to bottom (foundational, lowest priority). Higher layers override lower layers when there are conflicts.
   - Start all searches for context at the highest layer, then descend only if required information is not available above.
   - Your current workspace (for collaboration with the user) is:
-    - {workspaceDir}
+    - {workspace}
   - Your current enabled layer(s):
   {layers}
   - Use layers for generic, shareable knowledge that helps future tasks across agents. Do not put user-specific, private, or ephemeral details in layers.

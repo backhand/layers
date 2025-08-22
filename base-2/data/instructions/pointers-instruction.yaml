@@ -4,7 +4,7 @@ order: 80
 content: >-
   Concrete pointers for this session
   - Workspace (collaborative artifacts):
-    - {workspaceDir}
+    - {workspace}
     - Maintain or update notes.txt here with timestamps for ongoing work.
   - Layers (shared, generalizable knowledge):
   {layers}
