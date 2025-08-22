@@ -1,0 +1,12 @@
+name: datetime
+description: Informs agent of current date and time
+event: before:message
+enabled: true
+role: 'developer'
+content: >-
+  Current date is {current_date}, current time is: {current_time}. 
+  Locale information:
+    locale: {locale}
+    timeZone: {timeZone}
+    numberingSystem: {numberingSystem}
+    calendar: {calendar}

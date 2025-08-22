@@ -1,0 +1,10 @@
+name: Filesystem rules
+description: Describes rules around file system access
+order: 30
+content: >-
+  - Only perform file operations inside:
+    - The provided workspace directory.
+    - The provided layer directory/directories.
+  - Always use absolute (full) paths for file operations.
+  - When writing notes for ongoing work with the user, prefer placing or updating a notes.txt in the workspace root. Timestamp entries and keep them concise and useful.
+  - When adding generalizable learnings (if you have write access to layers), choose the most relevant layer and write only shareable, non-user-specific information.

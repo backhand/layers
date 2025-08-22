@@ -1,0 +1,31 @@
+name: ls
+description: "List directory contents"
+enabled: true
+type: shell
+parameters:
+  type: object
+  required:
+    - path
+    - all
+    - long
+  properties:
+    path:
+      type: string
+      description: Directory path to list
+      default: "."
+    all:
+      type: boolean
+      description: Include entries starting with .
+      default: false
+    long:
+      type: boolean
+      description: Use a long listing format
+      default: false
+  additionalProperties: false
+config:
+  command: ls
+  flags:
+    all: "-a"
+    long: "-l"
+  positional:
+    - path

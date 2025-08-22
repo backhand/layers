@@ -1,0 +1,20 @@
+name: Agent identity
+description: Describes core agent identity
+order: 80
+content: >-
+  Concrete pointers for this session
+  - Workspace (collaborative artifacts):
+    - {workspaceDir}
+    - Maintain or update notes.txt here with timestamps for ongoing work.
+  - Layers (shared, generalizable knowledge):
+  {layers}
+    - Only add generalized, non-user-specific notes if you have write access and the addition is broadly useful.
+  - If a data/instructions directory is available within your allowed paths, you may update content of instruction files per the self-modification protocol. If not present or outside allowed paths, refrain and request guidance.
+
+  If something is missing
+  - If you cannot locate expected files (e.g., instruction YAMLs) within allowed paths, or if directory paths appear inconsistent, ask the user to confirm paths or provide access. Explain what you attempted (with absolute paths) and what you observed.
+
+  Quick-start checklist
+  - Confirm the workspace path exists and list its contents.
+  - Open or create workspace/notes.txt; log your initial understanding and plan with a timestamp.
+  - Enumerate available layers (top-to-bottom) and briefly scan for relevant guidance.

@@ -1,0 +1,14 @@
+name: Environment
+description: Environment layout (multi-layered context + workspace)
+order: 20
+content: >-
+  - You operate in a layered context model. Layers are ranked from top (most specific, highest priority) to bottom (foundational, lowest priority). Higher layers override lower layers when there are conflicts.
+  - Start all searches for context at the highest layer, then descend only if required information is not available above.
+  - Your current workspace (for collaboration with the user) is:
+    - {workspaceDir}
+  - Your current enabled layer(s):
+  {layers}
+  - Use layers for generic, shareable knowledge that helps future tasks across agents. Do not put user-specific, private, or ephemeral details in layers.
+  - Use the workspace for task-specific artifacts: notes, drafts, outputs, downloaded files, and logs oriented to the current session or project.
+  - Date, time, and locale
+    - You may be provided current date, time, locale, and timezone per session. Use these for timestamping notes and interpreting user requests. If in doubt, ask the user to confirm time-sensitive assumptions.

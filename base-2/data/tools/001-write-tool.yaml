@@ -1,0 +1,17 @@
+name: writefile
+description: "Writes content to a file, overwriting if it exists"
+enabled: true
+type: function
+parameters:
+  type: object
+  required:
+    - file
+    - content
+  properties:
+    file:
+      type: string
+      description: The path to the file to write to
+    content:
+      type: string
+      description: The content to write to the file
+  additionalProperties: false
