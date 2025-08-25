@@ -1,0 +1,81 @@
+name: find
+description: Find files or directories under a starting path by type and name pattern; supports following symlinks, staying on one filesystem, depth-first traversal, NUL-separated output.
+enabled: true
+type: shell
+parameters:
+  type: object
+  properties:
+    path:
+      type: string
+      description: Absolute or relative start directory (prefer absolute)
+    type_flag:
+      type: string
+      description: Flag used for type matching (use -type)
+      default: "-type"
+    type:
+      type: string
+      description: >-
+        File type: f(file), d(dir), l(symlink), b(block), c(char), p(FIFO), s(socket)
+    name_flag:
+      type: string
+      description: Flag used for name matching (-name or -iname for case-insensitive)
+      default: "-name"
+    name:
+      type: string
+      description: Glob pattern to match (quote your globs, e.g., '*.js' - MUST be enclosed in single or double quotes, e.g. "*.js" or "*" for all files)
+    maxdepth_flag:
+      type: string
+      description: Flag used for limiting depth (use -maxdepth)
+      default: "-maxdepth"
+    maxdepth:
+      type: number
+      description: Maximum levels to recurse into
+      default: 3
+    follow_symlinks:
+      type: boolean
+      description: Follow symlinks (-L)
+      default: false
+    depth_first:
+      type: boolean
+      description: Visit contents before directory itself (-depth)
+      default: false
+    xdev:
+      type: boolean
+      description: Do not descend into other filesystems (-xdev)
+      default: false
+    # print0:
+    #   type: boolean
+    #   description: Print NUL-terminated paths (-print0) for safe piping to xargs -0
+    #   default: false
+  required:
+    - path
+    - type_flag
+    - type
+    - name_flag
+    - name
+    - follow_symlinks
+    - depth_first
+    - xdev
+    # - print0
+    - maxdepth_flag
+    - maxdepth
+  additionalProperties: false
+config:
+  command: /usr/bin/find
+  flags:
+    follow_symlinks: "-L"
+    depth_first: "-depth"
+    xdev: "-xdev"
+    # print0: "-print0"
+  positional:
+    - follow_symlinks
+    - path
+    - maxdepth_flag
+    - maxdepth
+    - type_flag
+    - type
+    - name_flag
+    - name
+    - xdev
+    - depth_first
+    # - print0
