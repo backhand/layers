@@ -1,0 +1,60 @@
+name: git_status
+description: "Show the working tree status"
+enabled: true
+type: shell
+parameters:
+  type: object
+  required:
+    - subcommand
+    - path
+    - porcelain
+    - short
+    - branch
+    - show_stash
+    - ignored
+  properties:
+    subcommand:
+      type: string
+      description: The git subcommand (fixed to 'status')
+      default: "status"
+    path:
+      type: string
+      description: Optional pathspec to limit the status to
+      default: "."
+    porcelain:
+      type: boolean
+      description: Produce machine-readable output
+      default: false
+    short:
+      type: boolean
+      description: Give the output in the short-format
+      default: false
+    branch:
+      type: boolean
+      description: Show branch information
+      default: false
+    show_stash:
+      type: boolean
+      description: Show stash information
+      default: false
+    ignored:
+      type: boolean
+      description: Show ignored files
+      default: false
+  additionalProperties: false
+config:
+  command: git
+  flags:
+    porcelain: "--porcelain"
+    short: "-s"
+    branch: "-b"
+    show_stash: "--show-stash"
+    ignored: "--ignored"
+  positional:
+    - subcommand
+    - porcelain
+    - short
+    - branch
+    - show_stash
+    - ignored
+    - path
