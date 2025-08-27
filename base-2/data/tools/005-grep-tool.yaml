@@ -26,7 +26,7 @@ parameters:
       default: "."
     recursive:
       type: boolean
-      description: Recurse into directories
+      description: Recurse into directories - must be set to true if path is a directory and not a file
       default: false
     ignore_case:
       type: boolean
@@ -56,6 +56,18 @@ parameters:
       type: boolean
       description: Interpret pattern as an extended regular expression (ERE)
       default: false
+    include_filenames:
+      type: array
+      items:
+        type: string
+        description: Filename pattern to search in, e.g. *.ts, *.txt etc. Multiple file types can be specified
+      default: []
+    include_directories:
+      type: array
+      items:
+        type: string
+        description: List of directories to search in, e.g. src, data etc. Multiple directories types can be specified
+      default: []
   additionalProperties: false
 config:
   command: grep
@@ -68,6 +80,23 @@ config:
     files_with_matches: "-l"
     files_without_match: "-L"
     extended_regex: "-E"
+  options:
+    include_filenames:
+      option: "--include"
+      separator: =
+    include_directories:
+      option: "--include-dir"
+      separator: =
   positional:
+    - recursive
+    - ignore_case
+    - line_numbers
+    - word_regexp
+    - invert_match
+    - files_with_matches
+    - files_without_match
+    - extended_regex
     - pattern
     - path
+    - include_filenames
+    - include_directories
