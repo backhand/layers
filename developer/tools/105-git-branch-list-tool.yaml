@@ -1,0 +1,37 @@
+name: git_branch_list
+description: "List branches"
+enabled: true
+type: shell
+parameters:
+  type: object
+  required:
+    - subcommand
+    - all
+    - remotes
+    - verbose
+  properties:
+    subcommand:
+      type: string
+      description: The git subcommand (fixed to 'branch')
+      default: "branch"
+    all:
+      type: boolean
+      description: List both remote-tracking and local branches
+      default: false
+    remotes:
+      type: boolean
+      description: List or delete (if combined with delete flags) remote-tracking branches
+      default: false
+    verbose:
+      type: boolean
+      description: Show sha1 and commit subject line for each head
+      default: false
+  additionalProperties: false
+config:
+  command: git
+  flags:
+    all: "-a"
+    remotes: "-r"
+    verbose: "-v"
+  positional:
+    - subcommand

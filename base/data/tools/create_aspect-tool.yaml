@@ -1,0 +1,37 @@
+name: create_aspect
+description: "Creates a new aspect and adds it to the aspects datasource"
+enabled: true
+type: function
+parameters:
+  type: object
+  required:
+    - key
+  properties:
+    key:
+      type: string
+      description: Stable identifier for the aspect (e.g., "usability", "security").
+    name:
+      type: string
+      description: Human-friendly name for the aspect.
+    description:
+      type: string
+      description: Short description of what the aspect covers.
+    category:
+      type: string
+      description: Optional grouping/category label.
+    tags:
+      type: array
+      description: Tags for search/filtering.
+      items:
+        type: string
+    weight:
+      type: number
+      description: Relative weight for scoring/aggregation (defaults to 1).
+    enabled:
+      type: boolean
+      description: Whether the aspect is active (defaults to true).
+      default: true
+    metadata:
+      type: object
+      description: Free-form metadata (e.g., rubric, owner, links).
+  additionalProperties: false

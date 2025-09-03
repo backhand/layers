@@ -1,0 +1,69 @@
+name: analyze_file
+description: "Analyzes one or more files with a given prompt by invoking the model via TaskContext.processMessage; accepts files|paths|path in a format similar to inspect_files."
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    prompt:
+      type: string
+      description: Instruction or question for the analysis; will be passed as the message content.
+    model:
+      type: string
+      description: Optional model identifier override (e.g., "openai/gpt-4o-mini").
+    path:
+      type: string
+      description: Convenience alias for a single file path to analyze (absolute or workspace-relative).
+    paths:
+      type: array
+      description: Convenience alias for multiple file paths to analyze (absolute or workspace-relative).
+      items:
+        type: string
+    files:
+      type: array
+      description: Detailed file descriptors to analyze; mirrors inspect_files.
+      items:
+        type: object
+        required:
+          - path
+        properties:
+          path:
+            type: string
+            description: Absolute or workspace-relative path to the file to analyze.
+          role:
+            type: string
+            description: Suggested role (e.g., "context", "image", "audio", "document").
+          selectors:
+            type: object
+            description: Optional selectors to narrow content for later use (recorded only).
+            properties:
+              pages:
+                type: string
+                description: Page selection for paginated docs (e.g., "1,3-5").
+              byte_range:
+                type: object
+                properties:
+                  offset:
+                    type: integer
+                    description: Byte offset to start from.
+                  length:
+                    type: integer
+                    description: Number of bytes to include.
+                additionalProperties: false
+              regex:
+                type: string
+                description: Regex used to filter content downstream.
+            additionalProperties: false
+          hints:
+            type: object
+            description: Optional processing hints for downstream usage.
+            properties:
+              ocr:
+                type: boolean
+                description: Suggest that OCR may be needed for images/scanned PDFs.
+              language:
+                type: string
+                description: Expected primary language (BCP-47 or common name).
+            additionalProperties: false
+        additionalProperties: false
+  additionalProperties: false

@@ -1,13 +1,13 @@
-name: readfile
-description: "Reads the content of a file"
+name: start_task
+description: "Starts a task by task id"
 enabled: true
 type: function
 parameters:
   type: object
   required:
-    - file
+    - id
   properties:
-    file:
+    id:
       type: string
-      description: The path to the file to read
+      description: The id of the task to start
   additionalProperties: false

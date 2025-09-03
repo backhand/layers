@@ -1,0 +1,45 @@
+name: create_flow
+description: "Creates a new flow definition in the workspace"
+enabled: true
+type: function
+parameters:
+  type: object
+  required:
+    - nodes
+  properties:
+    id:
+      type: string
+      description: Optional custom id for the flow. If omitted, one will be generated.
+    name:
+      type: string
+      description: Human-friendly name of the flow
+    description:
+      type: string
+      description: Short description of what the flow does
+    version:
+      type: string
+      description: Flow spec version (default is 1.1)
+    entrypoints:
+      type: array
+      description: List of node ids that can start the flow
+      items:
+        type: string
+    context:
+      type: object
+      description: Arbitrary context values available to nodes
+    defaults:
+      type: object
+      description: Default runtime policies such as retries and timeout
+    ai:
+      type: object
+      description: Global AI defaults for LLM tasks and decisions
+    nodes:
+      type: object
+      description: Flow nodes keyed by node id. Each value must conform to NodeSchema (see src/agent/sources/flows.ts)
+    edges:
+      type: array
+      description: List of edges connecting nodes
+      items:
+        type: object
+        description: Edge object (from, to, optional on/condition/transform)
+  additionalProperties: false

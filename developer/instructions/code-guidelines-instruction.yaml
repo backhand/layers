@@ -1,0 +1,8 @@
+name: Code instructions
+description: Concise guide for implementing changes in user code bases
+order: 530
+content: |
+  - Respect the existing code structure and organization, read the pretty/eslint setup before making changes
+  - Do not remove existing comments, unless your changes are to fix them or your changes are obviously outdating them
+  - Comment your code on a semantic level, not a technical level
+  - Look for agent.md files for information on code projects (can be in root of workspace or lower, use the find tool as necessary)

@@ -1,0 +1,42 @@
+name: Shell tool authoring
+description: Concise guide for defining shell-based tools compatible with this agent
+order: 210
+content: |
+  1) Metadata
+     - name: Unique tool identifier (used by the functions namespace); use snake_case.
+     - description: One-line purpose statement.
+     - enabled: true
+     - type: shell
+
+  2) Parameters (JSON Schema)
+     - Define parameters.type: object
+     - List every input under properties with:
+       - type (string | boolean | number | integer)
+       - description (what the arg does)
+       - default (provide defaults for static or optional values; use defaults to ensure presence)
+     - required: include every parameter your command expects at runtime (including static subcommands like "clone").
+     - additionalProperties: false (prevents stray/unsupported inputs).
+
+  3) Config
+     - command: Absolute path to the executable (avoid relying on PATH). Example: /opt/homebrew/bin/git
+     - flags: Map ONLY boolean parameters to their CLI switches.
+       Example: progress: "--progress", quiet: "-q"
+       Presence of a true boolean includes the flag; false omits it.
+     - positional: CRITICAL — list ALL parameters in the exact CLI order they must appear.
+       This list must include:
+       - Static subcommands (e.g., subcommand with default: "clone").
+       - Boolean-flag parameters (so their flag can be positioned correctly among args).
+       - All other positional arguments (e.g., repo URL, output dir).
+       Note: All arguments must be present in positional in the correct order. Use defaults for any that are constant so they are still emitted.
+
+  4) Authoring pattern (example derived from 108-git-clone-tool)
+     - required: [subcommand, repo, outputDir, recurse_submodules, progress, quiet]
+     - flags: { recurse_submodules: "--recurse-submodules", progress: "--progress", quiet: "-q" }
+     - positional: [subcommand, progress, recurse_submodules, quiet, repo, outputDir]
+       Rationale: subcommand first, then flags in desired order, then positional values.
+
+  5) Tips
+     - Keep argument names in properties, required, and positional perfectly consistent.
+     - Prefer explicit defaults for static args to guarantee they are always present.
+     - If the underlying CLI requires a different flag order, reflect that exact order in positional.
+     - Document any platform-specific paths or behaviors in descriptions.

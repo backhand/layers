@@ -1,0 +1,50 @@
+name: create_task
+description: "Creates a new task for the agent and adds it to the task list"
+enabled: true
+type: function
+parameters:
+  type: object
+  required:
+    - purpose
+    - evaluation
+    - dependencies
+    # - due_date
+    - notes
+  properties:
+    purpose:
+      type: string
+      description: >-
+        Detailed task and outcome description.
+    workdir:
+      type: string
+      description: >-
+        Provide a work dir if the task calls for working in an existing directory, otherwise 
+        leave blank to have one created automatically.
+    flow:
+      type: string
+      description: The id of the flow to use for running this task.
+    prompt:
+      type: string
+      description: >-
+        A concise instruction to start the task. Example:
+        Given the task description of the current task, start by 
+    evaluation:
+      type: string
+      description: A guide to how to evaluate the output
+    dependencies:
+      type: array
+      description: A list of task ids that must be completed before this one (can be empty)
+      items: 
+        taskId:
+          type: string
+          description: A task id
+    # subtasks:
+    #   type: array
+    #   description: A list of task ids that must be completed before this one
+    # due_date:
+    #   type: string
+    #   description: An ISO date of when the task should be done by
+    notes:
+      type: string
+      description: Supporting information for this task
+  additionalProperties: false

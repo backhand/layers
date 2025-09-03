@@ -21,7 +21,7 @@ content: >-
   Both layers and workspaces are directories in the filesystem that you have access to. Never attempt
   to perform file system operations outside of those directories.
 
-  Important: Always use full paths to for file operations!
+  Important: Always use full paths for file operations!
 
   Your current workspaces is: {workspace}.
   Your layers are: {layers}

@@ -1,0 +1,26 @@
+name: exec
+description: >-
+  Execute an arbitrary shell command with arguments in a specified working directory, returning
+  stdout, stderr, and exit status. Supports normal bash-style redirects and chains, such as:
+    cd /some/dir && npm install
+    cat somefile.txt | grep "somepattern"
+enabled: true
+type: function
+parameters:
+  type: object
+  required:
+    - command
+    - cwd
+  properties:
+    command:
+      type: string
+      description: The full shell command to execute (all commands must be in the whitelist)
+    # args:
+    #   type: array
+    #   description: Array of arguments to pass to the command
+    #   items:
+    #     type: string
+    cwd:
+      type: string
+      description: The working directory to run the command in
+  additionalProperties: false

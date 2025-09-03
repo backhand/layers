@@ -8,6 +8,7 @@ parameters:
     - path
     - all
     - long
+    - recursive
   properties:
     path:
       type: string
@@ -21,11 +22,19 @@ parameters:
       type: boolean
       description: Use a long listing format
       default: false
+    recursive:
+      type: boolean
+      description: Recursively list subdirectories encountered.
+      default: false
   additionalProperties: false
 config:
   command: ls
   flags:
     all: "-a"
     long: "-l"
+    recursive: "-R"
   positional:
+    - all
+    - long
+    - recursive
     - path
