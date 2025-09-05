@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "event": {
+      "type": "string",
+      "enum": [
+        "before:message",
+        "after:message",
+        "before:response",
+        "after:response",
+        "before:task",
+        "after:task"
+      ]
+    },
+    "order": {
+      "type": "number"
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "enabled": {
+      "default": true,
+      "type": "boolean"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "system",
+        "developer",
+        "user",
+        "assistant"
+      ]
+    },
+    "conditions": {},
+    "imports": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "values": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "parameters": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "event",
+    "enabled"
+  ],
+  "additionalProperties": false
+}
