@@ -1,0 +1,43 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+type: object
+properties:
+  id:
+    type: string
+  key:
+    description: Stable identifier for the aspect (e.g., "usability", "security",
+      "developer")
+    type: string
+    minLength: 1
+  name:
+    description: Human-friendly label
+    type: string
+  description:
+    type: string
+  category:
+    type: string
+  tags:
+    type: array
+    items:
+      type: string
+  weight:
+    default: 1
+    type: number
+  enabled:
+    default: true
+    type: boolean
+  activeTools:
+    description: List of tools that are allowed to be used for this aspect (if
+      empty, all tools are allowed)
+    type: array
+    items:
+      type: string
+  metadata:
+    type: object
+    propertyNames:
+      type: string
+    additionalProperties: {}
+required:
+  - key
+  - weight
+  - enabled
+additionalProperties: false
