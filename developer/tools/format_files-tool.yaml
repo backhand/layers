@@ -1,0 +1,21 @@
+name: format_files
+description: >-
+  Run the configured formatter (Prettier) across matching files. Attempts bunx prettier; returns list either way.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    globs:
+      type: array
+      items: { type: string }
+    options:
+      type: object
+      properties:
+        engine: { type: string, enum: [prettier] }
+        write: { type: boolean }
+        configPath: { type: string }
+        dryRun: { type: boolean }
+        root: { type: string }
+  required: [globs]
+  additionalProperties: false

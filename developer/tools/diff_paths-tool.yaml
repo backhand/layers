@@ -1,0 +1,25 @@
+name: diff_paths
+description: >-
+  Produce a unified diff between two files or between a file and provided content.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    a:
+      type: object
+      properties:
+        path: { type: string }
+        content: { type: string }
+    b:
+      type: object
+      properties:
+        path: { type: string }
+        content: { type: string }
+    options:
+      type: object
+      properties:
+        context: { type: number }
+        ignoreEol: { type: boolean }
+  required: [a, b]
+  additionalProperties: false

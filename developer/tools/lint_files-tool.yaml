@@ -1,0 +1,24 @@
+name: lint_files
+description: >-
+  Lint source files by extension. Prefers ESLint (via bunx) when available; falls back to TypeScript diagnostics. Supports TS/JS out of the box.
+enabled: false
+type: function
+parameters:
+  type: object
+  properties:
+    globs:
+      type: array
+      items: { type: string }
+    options:
+      type: object
+      properties:
+        engine: { type: string, enum: [eslint, tsc] }
+        fix: { type: boolean }
+        configPath: { type: string }
+        tsconfigPath: { type: string }
+        root: { type: string }
+        exts:
+          type: array
+          items: { type: string }
+  required: [globs]
+  additionalProperties: false

@@ -1,0 +1,15 @@
+name: code_outline
+description: >-
+  Produce a lightweight outline of top-level symbols in a code file (functions, classes, types, interfaces, vars).
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    path: { type: string }
+    options:
+      type: object
+      properties:
+        languageHint: { type: string }
+  required: [path]
+  additionalProperties: false

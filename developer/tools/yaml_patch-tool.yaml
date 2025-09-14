@@ -1,0 +1,26 @@
+name: yaml_patch
+description: >-
+  Update YAML files with simple path-based set/delete operations. Returns a preview on dry-run.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    path: { type: string }
+    ops:
+      type: array
+      items:
+        type: object
+        properties:
+          op: { type: string, enum: [set, delete] }
+          path: { type: string }
+          value: { }
+        required: [op, path]
+    options:
+      type: object
+      properties:
+        anchorStyle: { type: string, enum: [preserve, strip] }
+        backup: { type: boolean }
+        dryRun: { type: boolean }
+  required: [path, ops]
+  additionalProperties: false

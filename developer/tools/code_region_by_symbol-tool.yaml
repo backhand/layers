@@ -1,0 +1,16 @@
+name: code_region_by_symbol
+description: >-
+  Extract a function/class/type region by symbol name from a code file using a lightweight outline.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    path: { type: string }
+    symbol: { type: string }
+    options:
+      type: object
+      properties:
+        languageHint: { type: string }
+  required: [path, symbol]
+  additionalProperties: false

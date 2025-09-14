@@ -1,0 +1,35 @@
+name: apply_patch
+description: >-
+  Apply a unified diff (git-style). Uses `git apply` under the hood. Defaults to dry-run/check.
+  New: supports options.fuzzy with values off|loose|aggressive (default aggressive; adds --unidiff-zero).
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    patch:
+      type: string
+      description: Unified diff content to apply.
+    options:
+      type: object
+      properties:
+        root:
+          type: string
+          description: Base directory to apply the patch in. Defaults to the current workspace root.
+        strip:
+          type: number
+          description: Path strip level passed as -pN to git apply.
+          default: 0
+        dryRun:
+          type: boolean
+          description: If true, run git apply --check only; no files modified.
+          default: true
+        fuzzy:
+          type: string
+          enum: [off, loose, aggressive]
+          description: >-
+            Fuzziness level for applying hunks. 'aggressive' adds --unidiff-zero for zero-context diffs.
+          default: aggressive
+      additionalProperties: false
+  required: [patch]
+  additionalProperties: false

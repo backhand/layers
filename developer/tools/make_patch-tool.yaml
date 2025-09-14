@@ -1,0 +1,25 @@
+name: make_patch
+description: >-
+  Generate a unified diff from provided edits (old/new text or by line range against file).
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    options:
+      type: object
+      properties:
+        root: { type: string }
+    edits:
+      type: array
+      items:
+        type: object
+        properties:
+          path: { type: string }
+          oldText: { type: string }
+          newText: { type: string }
+          startLine: { type: number }
+          endLine: { type: number }
+        required: [path]
+  required: [edits]
+  additionalProperties: false

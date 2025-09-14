@@ -1,0 +1,23 @@
+name: run_codemod
+description: >-
+  Run a minimal, inline codemod across files. Supports sed-like string transforms (s/pat/repl/flags). Returns previews on dry-run.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    transform:
+      type: string
+      description: Sed-like expression (e.g., s/old/new/g) or JSON string with {"pattern":"...","replacement":"...","flags":"g"}
+    globs:
+      type: array
+      items: { type: string }
+    options:
+      type: object
+      properties:
+        parser: { type: string, enum: [ts, tsx, babel] }
+        args: { type: object }
+        dryRun: { type: boolean }
+        root: { type: string }
+  required: [transform, globs]
+  additionalProperties: false

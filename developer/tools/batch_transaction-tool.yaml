@@ -1,0 +1,23 @@
+name: batch_transaction
+description: >-
+  Apply multiple file operations as a transaction. Takes a snapshot first and auto-rolls back on failure. Dry-run supported.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    steps:
+      type: array
+      items:
+        type: object
+        properties:
+          tool: { type: string }
+          args: { type: object }
+        required: [tool]
+    options:
+      type: object
+      properties:
+        dryRun: { type: boolean }
+        stopOnError: { type: boolean }
+  required: [steps]
+  additionalProperties: false

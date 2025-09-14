@@ -1,0 +1,27 @@
+name: json_patch
+description: >-
+  Apply RFC6902-style JSON Patch operations to a file. Supports dry-run preview.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    path: { type: string }
+    ops:
+      type: array
+      items:
+        type: object
+        properties:
+          op: { type: string }
+          path: { type: string }
+          value: { }
+          from: { type: string }
+        required: [op, path]
+    options:
+      type: object
+      properties:
+        pretty: { type: boolean }
+        backup: { type: boolean }
+        dryRun: { type: boolean }
+  required: [path, ops]
+  additionalProperties: false
