@@ -1,13 +1,19 @@
 name: start_task
-description: "Starts a task by task id"
+description: >-
+  Starts a task by task id, optionally starting a new duplicate task based on the given task id.
 enabled: true
 type: function
 parameters:
   type: object
   required:
     - id
+    - force
   properties:
     id:
       type: string
       description: The id of the task to start
+    force:
+      type: boolean
+      description: Whether to force the task to run again
+      default: false
   additionalProperties: false
