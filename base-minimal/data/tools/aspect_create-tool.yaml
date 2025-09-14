@@ -4,5 +4,7 @@ description: >-
 enabled: true
 type: function
 parameters:
-  aspectData:
-    _include: aspects
+  type: object
+  properties:
+    aspectData:
+      _include: aspects
