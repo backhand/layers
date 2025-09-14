@@ -1,0 +1,70 @@
+name: readfile
+description: >-
+  Reads the content of a file. Multiple formats supported. For images and PDF files, will return interpretations
+  generated from the supplied interpretation_prompt.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    uri:
+      type: string
+      description: Absolute file path
+    mime_hint:
+      type: string
+      enum:
+        - application/pdf
+        - image/png
+        - image/jpeg
+        - auto
+      default: auto
+    max_pages:
+      type: integer
+      description: The maximum number of pages (if file has pages) to process
+      minimum: 1
+      default: 50
+    interpretation_prompt:
+      type: string
+      description: A prompt for describing the file contents if not text based (run for each page if file has pages)
+    # modes:
+    #   type: array
+    #   items:
+    #     type: string
+    #     enum:
+    #       - text
+    #       - layout
+    #       - images
+    #       - tables
+    #       - ocr
+    #   default:
+    #     - text
+    #     - layout
+    #     - tables
+    ocr_policy:
+      type: string
+      description: The policy for when to use ocr.
+      enum:
+        - auto
+        - never
+        - force
+      default: auto
+    # quality:
+    #   type: string
+    #   enum:
+    #     - fast
+    #     - balanced
+    #     - accurate
+    #   default: balanced
+    # page_selection:
+    #   type: string
+    #   description: >-
+    #     e.g. '1-5,10,12-'
+  required:
+    - uri
+    - mime_hint
+    - max_pages
+    # - modes
+    - ocr_policy
+    # - quality
+    # - page_selection
+  additionalProperties: false

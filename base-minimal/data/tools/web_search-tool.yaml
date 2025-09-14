@@ -1,0 +1,22 @@
+name: web_search
+description: >-
+  Search the web for a query. Supports multiple search engines.
+enabled: true
+type: function
+parameters:
+  type: object
+  additionalProperties: false
+  required:
+    - q
+    - engine
+    # - task
+  properties:
+    q:
+      type: string
+      description: Search string
+    engine:
+      type: string
+      enum:
+        - google
+        - exa
+      description: Which search engine to use

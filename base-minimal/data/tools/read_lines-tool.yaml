@@ -1,0 +1,26 @@
+name: read_lines
+description: >-
+  Read a bounded range of lines from a text file (1-based inclusive). Defaults to a safe max of 2000 lines.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    path:
+      type: string
+      description: Absolute or workspace-relative file path
+    start:
+      type: number
+      description: 1-based start line (default 1)
+    end:
+      type: number
+      description: Inclusive end line (defaults to start+maxLines)
+    includeNumbers:
+      type: boolean
+      description: Prefix result lines with their line numbers
+    maxLines:
+      type: number
+      description: Safety cap for number of lines to read (default 2000)
+  required:
+    - path
+  additionalProperties: false

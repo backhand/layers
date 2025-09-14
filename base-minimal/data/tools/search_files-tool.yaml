@@ -1,0 +1,29 @@
+name: search_files
+description: >-
+  Search recursively for a pattern across files under the workspace. Supports regex, globs, ignore, and context lines.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    pattern:
+      type: string
+    options:
+      type: object
+      properties:
+        regex:
+          type: boolean
+        globs:
+          type: array
+          items: { type: string }
+        ignore:
+          type: array
+          items: { type: string }
+        context:
+          type: number
+        maxMatches:
+          type: number
+        root:
+          type: string
+  required: [pattern]
+  additionalProperties: false

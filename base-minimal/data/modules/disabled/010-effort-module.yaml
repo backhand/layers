@@ -1,0 +1,15 @@
+name: set_effort
+description: Determine reasoning effort for subsequent inferences
+event: before:message
+enabled: false
+parameters:
+  reasoning:
+    summary: 'defailed'
+    effort: minimal
+format:
+  set-parameters:
+    effort: 
+      type: string
+      description: 'The effort to apply: low, medium or high'
+prompt: >-
+  

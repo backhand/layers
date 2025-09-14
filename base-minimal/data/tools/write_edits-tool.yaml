@@ -1,0 +1,39 @@
+name: write_edits
+description: >-
+  Apply explicit line-range edits to a file atomically. Supports precondition hash, backup, EOL control, and dry-run.
+  Ensure you read the relevant lines of the file first if it's been changed since you last read it.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    path:
+      type: string
+    edits:
+      type: array
+      items:
+        type: object
+        properties:
+          startLine:
+            type: number
+          endLine:
+            type: number
+          text:
+            type: string
+        required: [startLine, endLine, text]
+    options:
+      type: object
+      properties:
+        preconditionHash:
+          type: string
+        createIfMissing:
+          type: boolean
+        backup:
+          type: boolean
+        eol:
+          type: string
+          enum: [lf, crlf]
+        dryRun:
+          type: boolean
+  required: [path, edits]
+  additionalProperties: false

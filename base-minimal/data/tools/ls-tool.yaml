@@ -1,0 +1,40 @@
+name: ls
+description: "List directory contents"
+enabled: true
+type: shell
+parameters:
+  type: object
+  required:
+    - path
+    - all
+    - long
+    - recursive
+  properties:
+    path:
+      type: string
+      description: Directory path to list
+      default: "."
+    all:
+      type: boolean
+      description: Include entries starting with .
+      default: false
+    long:
+      type: boolean
+      description: Use a long listing format
+      default: false
+    recursive:
+      type: boolean
+      description: Recursively list subdirectories encountered.
+      default: false
+  additionalProperties: false
+config:
+  command: ls
+  flags:
+    all: "-a"
+    long: "-l"
+    recursive: "-R"
+  positional:
+    - all
+    - long
+    - recursive
+    - path

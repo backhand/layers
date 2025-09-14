@@ -1,0 +1,14 @@
+name: snapshot_workspace
+description: >-
+  Create a quick snapshot of the current workspace (excluding common build folders) for easy rollback.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    label: { type: string }
+    globs:
+      type: array
+      items: { type: string }
+  required: []
+  additionalProperties: false

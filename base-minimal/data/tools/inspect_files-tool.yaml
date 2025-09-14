@@ -1,0 +1,80 @@
+name: inspect_files
+description: "Preflight-inspects file paths for analysis; validates allowlisted locations and returns metadata, size, mime, and warnings"
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    prompt:
+      type: string
+      description: Optional prompt or note describing why the inspection is run (for logs/planning).
+    path:
+      type: string
+      description: Convenience alias for a single file path to inspect (absolute or workspace-relative).
+    paths:
+      type: array
+      description: Convenience alias for multiple file paths to inspect (absolute or workspace-relative).
+      items:
+        type: string
+    files:
+      type: array
+      description: Detailed file descriptors to inspect; preferred over paths when roles/selectors/hints are needed.
+      items:
+        type: object
+        required:
+          - path
+        properties:
+          path:
+            type: string
+            description: Absolute or workspace-relative path to the file to inspect.
+          role:
+            type: string
+            description: Suggested role for downstream usage (e.g., "context", "image", "audio", "document").
+          selectors:
+            type: object
+            description: Optional selectors to narrow content for later use.
+            properties:
+              pages:
+                type: string
+                description: Page selection for paginated docs (e.g., "1,3-5"). Not applied during inspection, but recorded.
+              byte_range:
+                type: object
+                properties:
+                  offset:
+                    type: integer
+                    description: Byte offset to start from.
+                  length:
+                    type: integer
+                    description: Number of bytes to include.
+                additionalProperties: false
+              regex:
+                type: string
+                description: Regex used to filter content downstream. Recorded only.
+            additionalProperties: false
+          hints:
+            type: object
+            description: Optional processing hints for downstream usage.
+            properties:
+              ocr:
+                type: boolean
+                description: Suggest that OCR may be needed for images/scanned PDFs.
+              language:
+                type: string
+                description: Expected primary language (BCP-47 or common language name).
+            additionalProperties: false
+        additionalProperties: false
+    budget:
+      type: object
+      description: Soft limits to guide warnings about size and count.
+      properties:
+        max_tokens:
+          type: integer
+          description: Upper bound on downstream token budget (for planning only).
+        max_bytes_per_file:
+          type: integer
+          description: Maximum bytes per file before emitting a warning.
+        max_files:
+          type: integer
+          description: Maximum number of files before emitting a warning.
+      additionalProperties: false
+  additionalProperties: false

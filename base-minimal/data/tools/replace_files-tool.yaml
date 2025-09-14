@@ -1,0 +1,31 @@
+name: replace_files
+description: >-
+  Replace a pattern across multiple files. Supports regex or literal, globs, ignore, and dry-run previews.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    pattern:
+      type: string
+    replacement:
+      type: string
+    options:
+      type: object
+      properties:
+        regex:
+          type: boolean
+        globs:
+          type: array
+          items: { type: string }
+        ignore:
+          type: array
+          items: { type: string }
+        confirmPerFile:
+          type: boolean
+        dryRun:
+          type: boolean
+        root:
+          type: string
+  required: [pattern, replacement]
+  additionalProperties: false

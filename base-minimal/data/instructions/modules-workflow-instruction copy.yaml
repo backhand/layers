@@ -1,0 +1,16 @@
+name: Modules and their lifecycle
+description: Guidelines for modules that run before or after messages to guide behavior, including activation, contracts, and safety.
+order: 12
+enabled: true
+content: >-
+  - Modules can be registered as pre-message (before) or post-message (after) components, and behave as middle-ware
+    between different types of agent actions or requests. Each module defines a prompt, which when run will produce an
+    output. For 'before:message' types, it is inserted into the message history with the defined role.
+  - Each module defines:
+    - name
+    - event ('before:message', 'before:response', 'after:response', 'before:task', 'after:task')
+    - prompt
+    - role (the role of the output as it will appear in the message stream)
+    - order: Invocation order is controlled by an order field or a registry, enabling deterministic pipelines. Lower numbers
+      are invoked first.
+  - Modules are defined in yaml-files in the data/modules directory of either your layers or workspace

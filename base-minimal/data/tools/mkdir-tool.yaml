@@ -1,0 +1,19 @@
+name: mkdir
+description: "Creates a directory, including parents"
+enabled: true
+type: shell
+parameters:
+  type: object
+  required:
+    - path
+  properties:
+    path:
+      type: string
+      description: Directory path to create
+  additionalProperties: false
+config:
+  command: mkdir
+  flags:
+    parents: "-p"
+  positional:
+    - path

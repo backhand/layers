@@ -1,0 +1,15 @@
+name: restore_snapshot
+description: >-
+  Restore files from a previously created workspace snapshot. Can run in preview mode.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    snapshotId: { type: string }
+    options:
+      type: object
+      properties:
+        preview: { type: boolean }
+  required: [snapshotId]
+  additionalProperties: false

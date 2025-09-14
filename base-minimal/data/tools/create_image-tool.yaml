@@ -1,0 +1,30 @@
+name: create_image
+description: >-
+  Creates an image through a predefined image model. Returns a list of the filenames created.
+enabled: true
+type: function
+parameters:
+  type: object
+  additionalProperties: false
+  properties:
+    prompt:
+      type: string
+      description: The input prompt to generate the image from.
+    n:
+      type: number
+      description: Number of images to generate.
+    size:
+      type: string
+      description: >-
+        Size of the images to generate. Format: `{width}x{height}`.
+    aspectRatio:
+      type: string
+      description: >-
+        Aspect ratio of the images to generate. Format: `{width}:{height}`.
+    seed:
+      type: number
+      description: Seed for the image generation.
+    maxRetries:
+      type: number
+      description: >-
+        Maximum number of retries. Default: 2.

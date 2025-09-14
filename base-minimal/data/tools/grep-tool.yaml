@@ -1,0 +1,114 @@
+name: grep
+description: "Search for patterns within files"
+enabled: true
+type: shell
+parameters:
+  type: object
+  required:
+    - pattern
+    - path
+    - recursive
+    - ignore_case
+    - line_numbers
+    - word_regexp
+    - invert_match
+    - files_with_matches
+    - files_without_match
+    - extended_regex
+  properties:
+    pattern:
+      type: string
+      description: The regex pattern to search for
+    path:
+      type: string
+      description: File or directory path to search
+      default: "."
+    recursive:
+      type: boolean
+      description: Recurse into directories - must be set to true if path is a directory and not a file
+      default: false
+    ignore_case:
+      type: boolean
+      description: Ignore case distinctions
+      default: false
+    line_numbers:
+      type: boolean
+      description: Prefix each line of output with the line number within its input file
+      default: false
+    word_regexp:
+      type: boolean
+      description: Select only those lines containing matches that form whole words
+      default: false
+    invert_match:
+      type: boolean
+      description: Invert the sense of matching, to select non-matching lines
+      default: false
+    files_with_matches:
+      type: boolean
+      description: Print only the names of files containing matches
+      default: false
+    files_without_match:
+      type: boolean
+      description: Print only the names of files with no matches
+      default: false
+    # max_count:
+    #   type: number
+    #   description: Maximum amount of results to return (default 10, max 10)
+    #   default: 10
+    only_matching:
+      type: string
+      description: Return only the matching part of a line (use this preferably to limit size of output)
+      default: true
+    extended_regex:
+      type: boolean
+      description: Interpret pattern as an extended regular expression (ERE)
+      default: false
+    include_filenames:
+      type: array
+      items:
+        type: string
+        description: Filename pattern to search in, e.g. *.ts, *.txt etc. Multiple file types can be specified
+      default: []
+    include_directories:
+      type: array
+      items:
+        type: string
+        description: List of directories to search in, e.g. src, data etc. Multiple directories types can be specified
+      default: []
+  additionalProperties: false
+config:
+  command: grep
+  flags:
+    recursive: "-r"
+    ignore_case: "-i"
+    line_numbers: "-n"
+    word_regexp: "-w"
+    invert_match: "-v"
+    files_with_matches: "-l"
+    files_without_match: "-L"
+    extended_regex: "-E"
+    only_matching: "--only-matching"
+  options:
+    # max_count:
+    #   option: "--count"
+    #   separator: =
+    include_filenames:
+      option: "--include"
+      separator: =
+    include_directories:
+      option: "--include-dir"
+      separator: =
+  positional:
+    - recursive
+    - ignore_case
+    - line_numbers
+    - only_matching
+    - word_regexp
+    - invert_match
+    - files_with_matches
+    - files_without_match
+    - extended_regex
+    - pattern
+    - path
+    - include_filenames
+    - include_directories

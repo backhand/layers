@@ -1,0 +1,8 @@
+name: list_flows
+description: "List available workflows"
+enabled: false
+type: function
+parameters:
+  type: object
+  properties: {}
+  additionalProperties: false

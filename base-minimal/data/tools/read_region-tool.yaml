@@ -1,0 +1,22 @@
+name: read_region
+description: >-
+  Extract a region of a file around an anchor (string or /regex/flags). Returns text and start/end line numbers.
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    path:
+      type: string
+    anchor:
+      type: string
+      description: Literal substring or regex in /pattern/flags form
+    before:
+      type: number
+      description: Lines to include before the anchor (default 10)
+    after:
+      type: number
+      description: Lines to include after the anchor (default 20)
+  required:
+    - path
+  additionalProperties: false
