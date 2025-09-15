@@ -1,0 +1,10 @@
+name: layer_registry_import
+description: Import a layer from the registry, adding it to the current list of layers and updating the agent manifest
+enabled: true
+type: function
+parameters:
+  type: object
+  properties: 
+    layerId:
+      type: string
+      description: The id of the layer to add

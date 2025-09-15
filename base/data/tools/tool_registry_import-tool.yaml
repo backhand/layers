@@ -1,0 +1,12 @@
+name: tool_registry_import
+description: Import a tool from the registry, adding it to a specific layer
+enabled: true
+type: function
+parameters:
+  type: object
+  properties: 
+    toolId:
+      type: string
+      description: The id of the tool to add
+    layerName:
+      type: string
