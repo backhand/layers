@@ -1,0 +1,7 @@
+name: layer_registry_list
+description: List available layers from the registry
+enabled: true
+type: function
+parameters:
+  type: object
+  properties: {}

@@ -1,0 +1,10 @@
+name: aspect_create
+description: >-
+  Create a new aspect
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    aspectData:
+      _include: aspects

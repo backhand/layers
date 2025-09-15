@@ -1,0 +1,12 @@
+name: aspect_select
+description: >-
+  Selects an aspect, activating the associated focus mode
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    aspectId:
+      type: string
+      description: Id of the aspect to activate
+      

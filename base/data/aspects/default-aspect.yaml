@@ -1,0 +1,9 @@
+name: Default aspect
+key: default
+description: Default aspect with no specific scope
+weight: 1
+enabled: true
+tags: 
+  - default
+metadata:
+  created: 2025-09-16

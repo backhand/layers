@@ -1,0 +1,9 @@
+name: aspect_list
+description: >-
+  List all available aspects
+enabled: true
+type: function
+parameters:
+  type: object
+  properties: {}
+  additionalProperties: false

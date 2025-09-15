@@ -1,0 +1,18 @@
+name: Identity aspect
+key: identity
+description: Aspect for self-reflection, identity and improvement
+weight: 1
+enabled: true
+tags: 
+  - identity
+activeTools: 
+  - aspect_create
+  - aspect_select
+  - aspect_list
+  - layer_registry_list
+  - layer_registry_import
+  - tool_registry_list
+  - tool_registry_import
+  - set_name
+metadata: 
+  created: 2025-09-16
