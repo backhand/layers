@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "event": {
+      "type": "string",
+      "enum": [
+        "before:message",
+        "after:message",
+        "before:response",
+        "after:response",
+        "before:task",
+        "after:task",
+        "after:agent-create"
+      ]
+    },
+    "order": {
+      "type": "number"
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "output": {
+      "description": "The output type of the module. Context will add the output as part of a message stream for follow-up inference, and message will create a new response message directly in the current conversation",
+      "type": "string",
+      "enum": [
+        "context",
+        "message"
+      ]
+    },
+    "enabled": {
+      "default": true,
+      "type": "boolean"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "system",
+        "developer",
+        "user",
+        "assistant"
+      ]
+    },
+    "conditions": {},
+    "imports": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "values": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "parameters": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "event",
+    "enabled"
+  ],
+  "additionalProperties": false
+}

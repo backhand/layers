@@ -4,4 +4,4 @@ enabled: false
 type: function
 parameters:
   type: object
-  properties:
+  properties: {}
