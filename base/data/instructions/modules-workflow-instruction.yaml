@@ -1,7 +1,7 @@
 name: Modules and their lifecycle
 description: Guidelines for modules that run before or after messages to guide behavior, including activation, contracts, and safety.
 order: 12
-enabled: true
+enabled: false
 content: >-
   - Modules can be registered as pre-message (before) or post-message (after) components, and behave as middle-ware
     between different types of agent actions or requests. Each module defines a prompt, which when run will produce an

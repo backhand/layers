@@ -1,0 +1,1027 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "entrypoints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "context": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "defaults": {
+      "type": "object",
+      "properties": {
+        "retries": {
+          "type": "object",
+          "properties": {
+            "max_attempts": {
+              "type": "number"
+            },
+            "backoff": {
+              "type": "string",
+              "enum": [
+                "none",
+                "fixed",
+                "exponential"
+              ]
+            },
+            "initial_delay": {
+              "type": "string"
+            },
+            "max_delay": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "timeout": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ai": {
+      "type": "object",
+      "properties": {
+        "defaults": {
+          "type": "object",
+          "properties": {
+            "model": {
+              "type": "string"
+            },
+            "temperature": {
+              "type": "number"
+            },
+            "max_tokens": {
+              "type": "number"
+            },
+            "budget": {
+              "type": "object",
+              "properties": {
+                "tokens": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "logging": {
+              "type": "object",
+              "properties": {
+                "capture_transcript": {
+                  "type": "boolean"
+                },
+                "capture_tool_calls": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "redaction": {
+              "type": "object",
+              "properties": {
+                "include": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "exclude": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "nodes": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "run_if": {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "default": "cel",
+                    "type": "string",
+                    "enum": [
+                      "cel",
+                      "jq",
+                      "js",
+                      "expr"
+                    ]
+                  },
+                  "expr": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "expr"
+                ],
+                "additionalProperties": false
+              },
+              "join": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "default": "all",
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "any",
+                      "count"
+                    ]
+                  },
+                  "count": {
+                    "type": "number"
+                  },
+                  "wait_for": {
+                    "type": "string",
+                    "enum": [
+                      "success",
+                      "failure",
+                      "any"
+                    ]
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              "retries": {
+                "type": "object",
+                "properties": {
+                  "max_attempts": {
+                    "type": "number"
+                  },
+                  "backoff": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "fixed",
+                      "exponential"
+                    ]
+                  },
+                  "initial_delay": {
+                    "type": "string"
+                  },
+                  "max_delay": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "timeout": {
+                "type": "string"
+              },
+              "concurrency": {
+                "type": "object",
+                "properties": {
+                  "limit": {
+                    "type": "number"
+                  },
+                  "scope": {
+                    "type": "string",
+                    "enum": [
+                      "global",
+                      "per_key"
+                    ]
+                  },
+                  "key": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "metadata": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {}
+              },
+              "type": {
+                "type": "string",
+                "const": "task"
+              },
+              "action": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "type": "string"
+                      },
+                      "ref": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "ref"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "inputs": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {}
+              },
+              "outputs": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {}
+              }
+            },
+            "required": [
+              "type",
+              "action",
+              "inputs",
+              "outputs"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "run_if": {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "default": "cel",
+                    "type": "string",
+                    "enum": [
+                      "cel",
+                      "jq",
+                      "js",
+                      "expr"
+                    ]
+                  },
+                  "expr": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "expr"
+                ],
+                "additionalProperties": false
+              },
+              "join": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "default": "all",
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "any",
+                      "count"
+                    ]
+                  },
+                  "count": {
+                    "type": "number"
+                  },
+                  "wait_for": {
+                    "type": "string",
+                    "enum": [
+                      "success",
+                      "failure",
+                      "any"
+                    ]
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              "retries": {
+                "type": "object",
+                "properties": {
+                  "max_attempts": {
+                    "type": "number"
+                  },
+                  "backoff": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "fixed",
+                      "exponential"
+                    ]
+                  },
+                  "initial_delay": {
+                    "type": "string"
+                  },
+                  "max_delay": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "timeout": {
+                "type": "string"
+              },
+              "concurrency": {
+                "type": "object",
+                "properties": {
+                  "limit": {
+                    "type": "number"
+                  },
+                  "scope": {
+                    "type": "string",
+                    "enum": [
+                      "global",
+                      "per_key"
+                    ]
+                  },
+                  "key": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "metadata": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {}
+              },
+              "type": {
+                "type": "string",
+                "const": "llm_task"
+              },
+              "llm": {
+                "type": "object",
+                "properties": {
+                  "model": {
+                    "type": "string"
+                  },
+                  "temperature": {
+                    "type": "number"
+                  },
+                  "max_tokens": {
+                    "type": "number"
+                  },
+                  "prompt": {
+                    "type": "object",
+                    "properties": {
+                      "messages": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "role": {
+                              "type": "string",
+                              "enum": [
+                                "system",
+                                "user",
+                                "assistant",
+                                "developer"
+                              ]
+                            },
+                            "content": {
+                              "type": "string"
+                            },
+                            "template": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "template": {
+                        "type": "string"
+                      },
+                      "inputs": {
+                        "type": "object",
+                        "propertyNames": {
+                          "type": "string"
+                        },
+                        "additionalProperties": {}
+                      },
+                      "few_shot": {
+                        "type": "array",
+                        "items": {}
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output": {
+                    "type": "object",
+                    "properties": {
+                      "schema": {},
+                      "map_to_outputs": {
+                        "type": "object",
+                        "propertyNames": {
+                          "type": "string"
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "tools": {
+                    "type": "array",
+                    "items": {}
+                  },
+                  "confidence": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "score_path": {
+                        "type": "string"
+                      },
+                      "fallback": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "approval": {
+                    "type": "object",
+                    "properties": {
+                      "required": {
+                        "type": "boolean"
+                      },
+                      "approver_role": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "state_projection": {
+                    "type": "object",
+                    "properties": {
+                      "include": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "exclude": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "redact": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "type",
+              "llm"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "run_if": {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "default": "cel",
+                    "type": "string",
+                    "enum": [
+                      "cel",
+                      "jq",
+                      "js",
+                      "expr"
+                    ]
+                  },
+                  "expr": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "expr"
+                ],
+                "additionalProperties": false
+              },
+              "join": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "default": "all",
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "any",
+                      "count"
+                    ]
+                  },
+                  "count": {
+                    "type": "number"
+                  },
+                  "wait_for": {
+                    "type": "string",
+                    "enum": [
+                      "success",
+                      "failure",
+                      "any"
+                    ]
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              "retries": {
+                "type": "object",
+                "properties": {
+                  "max_attempts": {
+                    "type": "number"
+                  },
+                  "backoff": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "fixed",
+                      "exponential"
+                    ]
+                  },
+                  "initial_delay": {
+                    "type": "string"
+                  },
+                  "max_delay": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "timeout": {
+                "type": "string"
+              },
+              "concurrency": {
+                "type": "object",
+                "properties": {
+                  "limit": {
+                    "type": "number"
+                  },
+                  "scope": {
+                    "type": "string",
+                    "enum": [
+                      "global",
+                      "per_key"
+                    ]
+                  },
+                  "key": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "metadata": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {}
+              },
+              "type": {
+                "type": "string",
+                "const": "noop"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "run_if": {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "default": "cel",
+                    "type": "string",
+                    "enum": [
+                      "cel",
+                      "jq",
+                      "js",
+                      "expr"
+                    ]
+                  },
+                  "expr": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "expr"
+                ],
+                "additionalProperties": false
+              },
+              "join": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "default": "all",
+                    "type": "string",
+                    "enum": [
+                      "all",
+                      "any",
+                      "count"
+                    ]
+                  },
+                  "count": {
+                    "type": "number"
+                  },
+                  "wait_for": {
+                    "type": "string",
+                    "enum": [
+                      "success",
+                      "failure",
+                      "any"
+                    ]
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              "retries": {
+                "type": "object",
+                "properties": {
+                  "max_attempts": {
+                    "type": "number"
+                  },
+                  "backoff": {
+                    "type": "string",
+                    "enum": [
+                      "none",
+                      "fixed",
+                      "exponential"
+                    ]
+                  },
+                  "initial_delay": {
+                    "type": "string"
+                  },
+                  "max_delay": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "timeout": {
+                "type": "string"
+              },
+              "concurrency": {
+                "type": "object",
+                "properties": {
+                  "limit": {
+                    "type": "number"
+                  },
+                  "scope": {
+                    "type": "string",
+                    "enum": [
+                      "global",
+                      "per_key"
+                    ]
+                  },
+                  "key": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "metadata": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {}
+              },
+              "type": {
+                "type": "string",
+                "const": "gateway"
+              },
+              "decider": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "const": "llm"
+                          },
+                          {
+                            "type": "string",
+                            "const": "agent"
+                          }
+                        ]
+                      },
+                      "model": {
+                        "type": "string"
+                      },
+                      "temperature": {
+                        "type": "number"
+                      },
+                      "max_tokens": {
+                        "type": "number"
+                      },
+                      "prompt": {
+                        "type": "object",
+                        "properties": {
+                          "messages": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "role": {
+                                  "type": "string",
+                                  "enum": [
+                                    "system",
+                                    "user",
+                                    "assistant",
+                                    "developer"
+                                  ]
+                                },
+                                "content": {
+                                  "type": "string"
+                                },
+                                "template": {
+                                  "type": "string"
+                                }
+                              },
+                              "additionalProperties": false
+                            }
+                          },
+                          "template": {
+                            "type": "string"
+                          },
+                          "inputs": {
+                            "type": "object",
+                            "propertyNames": {
+                              "type": "string"
+                            },
+                            "additionalProperties": {}
+                          },
+                          "few_shot": {
+                            "type": "array",
+                            "items": {}
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "choices": {
+                        "default": {
+                          "derive_from_edges": true
+                        },
+                        "type": "object",
+                        "properties": {
+                          "derive_from_edges": {
+                            "type": "boolean"
+                          },
+                          "explicit": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "label": {
+                                  "type": "string"
+                                },
+                                "to": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "label",
+                                "to"
+                              ],
+                              "additionalProperties": false
+                            }
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "output": {
+                        "type": "object",
+                        "properties": {
+                          "schema": {
+                            "type": "object",
+                            "propertyNames": {
+                              "type": "string"
+                            },
+                            "additionalProperties": {}
+                          },
+                          "mode": {
+                            "default": "single",
+                            "type": "string",
+                            "enum": [
+                              "single",
+                              "multi",
+                              "weights"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "mode"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "confidence": {
+                        "type": "object",
+                        "properties": {
+                          "min": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                          },
+                          "score_path": {
+                            "type": "string"
+                          },
+                          "fallback": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "rationale_capture": {
+                        "type": "string",
+                        "enum": [
+                          "none",
+                          "brief",
+                          "full"
+                        ]
+                      },
+                      "state_projection": {
+                        "type": "object",
+                        "properties": {
+                          "include": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "exclude": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "redact": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "prompt",
+                      "choices"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "decider"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "edges": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "on": {
+            "default": "success",
+            "type": "string",
+            "enum": [
+              "success",
+              "failure",
+              "timeout",
+              "any"
+            ]
+          },
+          "condition": {
+            "type": "object",
+            "properties": {
+              "language": {
+                "default": "cel",
+                "type": "string",
+                "enum": [
+                  "cel",
+                  "jq",
+                  "js",
+                  "expr"
+                ]
+              },
+              "expr": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "expr"
+            ],
+            "additionalProperties": false
+          },
+          "priority": {
+            "type": "number"
+          },
+          "transform": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "on"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "nodes",
+    "edges"
+  ],
+  "additionalProperties": false
+}

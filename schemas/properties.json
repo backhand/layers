@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "access": {
+      "description": "Access level for the property",
+      "type": "string",
+      "enum": [
+        "user",
+        "all"
+      ]
+    },
+    "name": {
+      "description": "Human-friendly name for this property item",
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "description": "Short description of the item",
+      "type": "string"
+    },
+    "category": {
+      "description": "Category for the property",
+      "type": "string",
+      "enum": [
+        "setting",
+        "system",
+        "user",
+        "secret"
+      ]
+    },
+    "type": {
+      "description": "Type of the property (e.g., string, number, boolean, json, secret, etc.)",
+      "type": "string",
+      "minLength": 1
+    },
+    "key": {
+      "description": "Lookup key or identifier within this property",
+      "type": "string",
+      "minLength": 1
+    },
+    "value": {
+      "description": "The stored value. Type should align with the \"type\" field"
+    }
+  },
+  "required": [
+    "name",
+    "type",
+    "key",
+    "value"
+  ],
+  "additionalProperties": false
+}

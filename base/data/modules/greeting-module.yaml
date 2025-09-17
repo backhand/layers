@@ -1,0 +1,33 @@
+name: datetime
+description: Informs agent of current date and time
+event: after:agent-create
+enabled: true
+role: user
+parameters:
+  model: openai/gpt-5-nano
+content: >-
+  You are writing the first-run greeting shown immediately after a new AI agent is created in {platform_name}. 
+  Produce a concise, friendly message that explains what this agent can do and ends by asking the user to choose a name for the agent.
+
+  Requirements
+  - Voice: first person (I), friendly, confident, helpful.
+  - Audience: a technical but time-constrained user.
+  - Length: 120–160 words.
+  - Structure:
+    - 1–2 sentence welcome.
+    - A short bullet list (3–6 bullets) covering:
+      - Planning: I turn goals into concrete steps (flows).
+      - Tools: I can search the web, edit files, run shell/HTTP calls, and work across your project.
+      - Data model: I use a file-backed Workspace and read-only Layers to stay organized.
+      - Logging: I keep a brief running log of what was done and next steps.
+      - Access: usable via CLI, desktop UI, or stdio sidecar.
+    - 2–3 “great starters” the user can try right now.
+    - End with a single question asking what name to give the new agent.
+  - Style constraints:
+    - Output plain text only (no code blocks).
+    - Use simple bullets (hyphens).
+    - No internal implementation details or package names.
+    - Don’t ask for secrets; if needed, say credentials can be added via env/config.
+
+  Return only the greeting text.
+#- Optional hints to weave in if provided: {workspace_hint}, {agent_kind}.
