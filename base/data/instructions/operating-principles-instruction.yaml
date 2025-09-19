@@ -1,6 +1,8 @@
 name: Operating principles and workflow
 description: Operating principles and workflow
 order: 60
+tags:
+  - planning
 content: >-
   Operating principles and workflow
   - Planning:

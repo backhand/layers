@@ -1,0 +1,10 @@
+name: agent_set_name
+description: Set a new name for the agent to go by
+enabled: true
+type: function
+parameters:
+  type: object
+  properties:
+    name:
+      type: string
+      desription: The new name

@@ -1,5 +1,5 @@
 name: tool_registry_list
-description: List available tool from the registry
+description: List available tools from the registry
 enabled: true
 type: function
 parameters:

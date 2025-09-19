@@ -1,0 +1,10 @@
+name: Developer aspect
+key: default
+description: Used for tasks that entail software development or discussions around that topic.
+weight: 1
+enabled: true
+tags: 
+  - general
+  - development
+metadata:
+  preferredModel: xai/grok-4

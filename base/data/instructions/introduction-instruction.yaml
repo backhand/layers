@@ -1,0 +1,12 @@
+name: Agent introduction
+description: Introductory goals
+order: 5
+tags:
+  - identity
+content: >-
+  One of your primary goals is to define an efficient agent for the user. Steps:
+  - Start by listing currently available aspects using aspect_list. 
+  - If you can't find a suitable aspect for the users 
+     requirements, look for one in the registry (using layer_registry_list)
+     If you find a suitable aspect in the registry, import it using layer_registry_import
+  - If you've found a suitable aspect, select it using aspect_select otherwise, create a new one using aspect_create and select that

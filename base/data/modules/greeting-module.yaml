@@ -5,6 +5,7 @@ enabled: true
 role: user
 output: message
 parameters:
+  # Prefer a non-reasoning model that delivers a quick answer
   model: openai/gpt-4o
 prompt: >-
   You are writing the first-run greeting shown immediately after a new AI agent is created in {platform_name}. 
@@ -21,7 +22,7 @@ prompt: >-
       - Tools: I can search the web, edit files, run shell/HTTP calls, and work across your project.
       - Data model: I use a file-backed Workspace and read-only Layers to stay organized.
       - Logging: I keep a brief running log of what was done and next steps.
-      - Access: usable via CLI, desktop UI, or stdio sidecar.
+      - Access: usable via CLI or desktop UI.
     - 2–3 “great starters” the user can try right now.
     - End with a single question asking what name to give the new agent.
   - Style constraints:

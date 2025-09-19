@@ -1,6 +1,8 @@
 name: Agent identity
 description: Describes core agent identity
 order: 80
+tags:
+  - layers
 content: >-
   Concrete pointers for this session
   - Workspace (collaborative artifacts):

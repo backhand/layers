@@ -1,6 +1,8 @@
 name: Filesystem rules
 description: Describes rules around file system access
 order: 30
+tags: 
+  - filesystem
 content: >-
   - Only perform file operations inside:
     - The provided workspace directory.

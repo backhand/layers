@@ -6,7 +6,7 @@ type: function
 parameters:
   type: object
   properties:
-    aspectId:
+    key:
       type: string
       description: Id of the aspect to activate
       

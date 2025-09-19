@@ -1,0 +1,9 @@
+name: reflection
+description: Reflects on user feedback and optionally updates instructions
+event: after:response
+enabled: true
+role: user
+output: notification
+parameters: {}
+prompt: >-
+  
